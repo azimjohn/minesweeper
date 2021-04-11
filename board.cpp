@@ -1,10 +1,15 @@
+#include <cstdlib>
 #include <iostream>
+#include <ctime>
+#include <unordered_set>
 #include "board.h"
 #include "gameover.h"
 
 using std::cout;
 using std::endl;
 using std::fstream;
+using std::pair;
+using std::unordered_set;
 
 
 board_t::board_t(const int W, const int H)
@@ -34,7 +39,44 @@ board_t::~board_t()
 
 void board_t::place_mines(const int count)
 {
+    int i = 0;
+    srand(time(nullptr));
+    unordered_set<int> positions;
 
+    while (i < count){
+        int pos = rand() % (width * height);
+        if (positions.count(pos) > 0)
+            continue;
+        int row = pos / width;
+        int col = pos % width;
+        positions.insert(pos);
+
+        place_mine(row, col);
+        ++i;
+    }
+}
+
+void board_t::place_mine(unsigned int row, unsigned int col) {
+    cells[row][col]->place_mine();
+
+    vector<pair<int, int>> neighbours{
+        {row-1, col-1},
+        {row-1, col+0},
+        {row-1, col+1},
+        {row+0, col-1},
+        {row+0, col+1},
+        {row+1, col-1},
+        {row+1, col+0},
+        {row+1, col+1},
+    };
+
+    for(auto pos : neighbours){
+        int i = pos.first;
+        int j = pos.second;
+
+        if(i >= 0 && i < height && j >= 0 and j < width)
+            cells[i][j]->increment_adjacent_mines();
+    }
 }
 
 void board_t::display()
@@ -71,6 +113,7 @@ void board_t::screenshot()
     }
 
     file.close();
+    cout << "Took Screenshot" << endl;
 }
 
 void board_t::reveal_cell(const unsigned int row, const unsigned int col)

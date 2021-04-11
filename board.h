@@ -15,6 +15,7 @@ private:
 public:
     board_t(int W, int H);
     void place_mines(int count);
+    void place_mine(unsigned int row, unsigned int col);
     void display();
     void screenshot();
     void reveal_cell(unsigned int row, unsigned int col);
