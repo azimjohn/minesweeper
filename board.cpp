@@ -21,7 +21,6 @@ board_t::board_t(const int W, const int H)
     }
 }
 
-
 board_t::~board_t()
 {
     for(int i = 0; i < height; ++i) {
@@ -33,7 +32,6 @@ board_t::~board_t()
     delete[] cells;
 }
 
-
 void board_t::place_mines(const int count)
 {
 
@@ -41,7 +39,13 @@ void board_t::place_mines(const int count)
 
 void board_t::display()
 {
+    cout << endl << "  ";
+    for(int i = 0; i < width; ++i)
+        cout << i;
+    cout << endl;
+
     for(int i = 0; i < height; ++i){
+        cout << i << " ";
         for(int j = 0; j < width; ++j){
             cout << cells[i][j]->get_display_value();
         }

@@ -4,7 +4,7 @@
 char cell_t::get_display_value()
 {
     if(is_flagged) return 'F';
-    if(!is_revealed) return ' ';
+    if(!is_revealed) return '?';
     if(is_mine) return 'X';
 
     return (char) (adjacent_mines + '0');
