@@ -1,7 +1,16 @@
 struct cell_t
 {
-    bool is_mine;
-    bool is_revealed;
-    char display_value;
+private:
+    bool is_mine = false;
+    bool is_flagged = false;
+    bool is_revealed = false;
+    int adjacent_mines = 0;
+
+public:
     char get_display_value();
+    void place_mine();
+    bool reveal();
+    void flag();
+    void unflag();
+    void increment_adjacent_mines();
 };
