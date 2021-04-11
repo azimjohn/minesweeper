@@ -2,6 +2,10 @@
 #include "board.h"
 #include "gameover.h"
 
+#define WINDOW_WIDTH 10
+#define WINDOW_HEIGHT 5
+#define MINES 24
+
 using std::cin;
 using std::cout;
 using std::endl;
@@ -11,17 +15,16 @@ void start_game(board_t* board);
 void show_manual()
 {
     cout << "Game Manual: " << endl;
-    cout << "\tS - screenshot" << endl;
-    cout << "\tR {r} {c} - reveal {r} {c} cell" << endl;
-    cout << "\tF {r} {c} - flag   {r} {c} cell" << endl;
-    cout << "\tU {r} {c} - unflag {r} {c} cell" << endl;
+    cout << "\tS - take screenshot" << endl;
+    cout << "\tR {r} {c} - reveal [r,c] cell" << endl;
+    cout << "\tF {r} {c} - flag   [r,c] cell" << endl;
+    cout << "\tU {r} {c} - unflag [r,c] cell" << endl;
+    cout << "\tQ - Quit Game" << endl;
 }
 
 int main(){
-    int width = 20, height = 10, mines = 42;
-
-    board_t board{width, height};
-    board.place_mines(mines);
+    board_t board{WINDOW_WIDTH, WINDOW_HEIGHT};
+    board.place_mines(MINES);
     show_manual();
 
     try {
@@ -35,7 +38,7 @@ int main(){
 
 void start_game(board_t* board){
     char action;
-    int row, col;
+    unsigned int row, col;
     board->display();
 
     while(true)
@@ -47,7 +50,7 @@ void start_game(board_t* board){
         {
         case 'S':
             board->screenshot();
-            break;
+            continue;
         case 'R':
             cin >> row >> col;
             board->reveal_cell(row, col);
@@ -60,9 +63,11 @@ void start_game(board_t* board){
             cin >> row >> col;
             board->unflag_cell(row, col);
             break;
+        case 'Q':
+            return;
         default:
             cout << "Unknown Action: " << action << endl;
-            break;
+            continue;
         }
         board->display();
     }
