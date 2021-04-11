@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
+#include <queue>
 #include <unordered_set>
 #include "board.h"
 #include "gameover.h"
@@ -9,6 +10,8 @@ using std::cout;
 using std::endl;
 using std::fstream;
 using std::pair;
+using std::make_pair;
+using std::queue;
 using std::unordered_set;
 
 
@@ -57,39 +60,38 @@ void board_t::place_mines(const int count)
 }
 
 void board_t::place_mine(unsigned int row, unsigned int col) {
-    cells[row][col]->place_mine();
+    auto cell = cells[row][col];
+    cell->place_mine();
 
-    vector<pair<int, int>> neighbours{
-        {row-1, col-1},
-        {row-1, col+0},
-        {row-1, col+1},
-        {row+0, col-1},
-        {row+0, col+1},
-        {row+1, col-1},
-        {row+1, col+0},
-        {row+1, col+1},
-    };
-
+    auto neighbours = get_adjacent_positions(row, col);
     for(auto pos : neighbours){
-        int i = pos.first;
-        int j = pos.second;
-
-        if(i >= 0 && i < height && j >= 0 and j < width)
-            cells[i][j]->increment_adjacent_mines();
+        cells[pos.first][pos.second]->increment_adjacent_mines();
     }
+}
+
+vector<pair<int, int>> board_t::get_adjacent_positions(unsigned int row, unsigned int col) {
+    vector<pair<int, int>> neighbours;
+    for(int i = -1; i <= 1; i++){
+        for(int j = -1; j <= 1; j++){
+            if(i == 0 && j == 0) continue;
+            if(row+i > 0 and row+i < height and col+j > 0 and col+j < width)
+                neighbours.emplace_back(row+i, col+j);
+        }
+    }
+    return neighbours;
 }
 
 void board_t::display()
 {
     cout << endl << "  ";
     for(int i = 0; i < width; ++i)
-        cout << i;
+        cout << i << " ";
     cout << endl;
 
     for(int i = 0; i < height; ++i){
         cout << i << " ";
         for(int j = 0; j < width; ++j){
-            cout << cells[i][j]->get_display_value();
+            cout << cells[i][j]->get_display_value() << " ";
         }
         cout << endl;
     }
@@ -126,7 +128,31 @@ void board_t::reveal_cell(const unsigned int row, const unsigned int col)
     if(mine_revealed)
         throw GameOver();
 
-    // todo: reveal all neighbouring cells with ripple effect;
+    queue<pair<int, int>> q;
+    unordered_set<cell_t*> visited;
+
+    q.push(make_pair(row, col));
+
+    while(!q.empty()){
+        auto pos = q.front();
+        q.pop();
+        cell = cells[pos.first][pos.second];
+
+        if (visited.count(cell) > 0){
+            continue;
+        }
+        visited.insert(cell);
+
+        if(!cell->auto_reveal())
+            continue;
+
+        cell->reveal();
+        if(cell->auto_reveal_neighbors()){
+            auto neighbors = get_adjacent_positions(pos.first, pos.second);
+            for(auto neighbor : neighbors)
+                q.push(neighbor);
+        }
+    }
 }
 
 void board_t::reveal_all_cells()

@@ -13,4 +13,6 @@ public:
     void flag();
     void unflag();
     void increment_adjacent_mines();
+    bool auto_reveal();
+    bool auto_reveal_neighbors();
 };

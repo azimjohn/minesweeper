@@ -3,6 +3,7 @@
 #include "cell.h"
 
 using std::vector;
+using std::pair;
 using std::fstream;
 
 struct board_t
@@ -22,5 +23,6 @@ public:
     void reveal_all_cells();
     void flag_cell(unsigned int row, unsigned int col);
     void unflag_cell(unsigned int row, unsigned int col);
+    vector<pair<int, int>> get_adjacent_positions(unsigned int row, unsigned int col);
     ~board_t();
 };

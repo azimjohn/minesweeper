@@ -3,8 +3,8 @@
 #include "gameover.h"
 
 #define WINDOW_WIDTH 10
-#define WINDOW_HEIGHT 5
-#define MINES 24
+#define WINDOW_HEIGHT 10
+#define MINES 10
 
 using std::cin;
 using std::cout;
