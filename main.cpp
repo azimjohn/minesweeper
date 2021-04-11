@@ -25,11 +25,11 @@ int main(){
     show_manual();
 
     try {
-       start_game(board);
-    } catch(GameOver e){
+       start_game(&board);
+    } catch(GameOver& e){
         board.reveal_all_cells();
         board.display();
-        cout << "Game Over :(";
+        cout << e.what();
     }
 }
 
@@ -45,23 +45,23 @@ void start_game(board_t* board){
 
         switch (action)
         {
-        case 'S', 's':
+        case 'S':
             board->screenshot();
             break;
-        case 'R', 'r':
+        case 'R':
             cin >> row >> col;
             board->reveal_cell(row, col);
             break;
-        case 'F', 'f':
+        case 'F':
             cin >> row >> col;
             board->flag_cell(row, col);
             break;
-        case 'U', 'u':
+        case 'U':
             cin >> row >> col;
             board->unflag_cell(row, col);
             break;
         default:
-            cout << "Unknown Action %c" % action << endl;
+            cout << "Unknown Action: " << action << endl;
             break;
         }
         board->display();

@@ -3,14 +3,9 @@
 
 char cell_t::get_display_value()
 {
-    if(!is_revealed) 
-        return ' ';
-    
-    if(is_flagged)
-        return 'F';
-
-    if(is_mine) 
-        return 'X';
+    if(!is_revealed) return ' ';
+    if(is_flagged) return 'F';
+    if(is_mine) return 'X';
 
     return adjacent_mines + '0';
 }
@@ -22,8 +17,7 @@ void cell_t::place_mine()
 
 bool cell_t::reveal()
 {
-    if(is_flagged) 
-        return false;
+    if(is_flagged) return false;
     
     is_revealed = true;
     return is_mine;
