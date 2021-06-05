@@ -1,15 +1,6 @@
 #include "cell.h"
 
 
-char cell_t::get_display_value() {
-    if (is_flagged) return 'F';
-    if (!is_revealed) return '?';
-    if (is_mine) return 'X';
-    if (adjacent_mines == 0) return ' ';
-
-    return (char) (adjacent_mines + '0');
-}
-
 void cell_t::place_mine() {
     is_mine = true;
 }

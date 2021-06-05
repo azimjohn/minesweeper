@@ -6,8 +6,6 @@ private:
     int adjacent_mines = 0;
 
 public:
-    char get_display_value();
-
     void place_mine();
 
     bool reveal();

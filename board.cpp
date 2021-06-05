@@ -1,14 +1,10 @@
 #include <cstdlib>
-#include <iostream>
 #include <ctime>
 #include <queue>
 #include <unordered_set>
 #include "board.h"
 #include "gameover.h"
 
-using std::cout;
-using std::endl;
-using std::fstream;
 using std::pair;
 using std::make_pair;
 using std::queue;
@@ -78,40 +74,6 @@ vector<pair<int, int>> board_t::get_adjacent_positions(unsigned int row, unsigne
     return neighbours;
 }
 
-void board_t::display() {
-    cout << endl << "  ";
-    for (int i = 0; i < width; ++i)
-        cout << i << " ";
-    cout << endl;
-
-    for (int i = 0; i < height; ++i) {
-        cout << i << " ";
-        for (int j = 0; j < width; ++j) {
-            cout << cells[i][j]->get_display_value() << " ";
-        }
-        cout << endl;
-    }
-    cout << endl;
-}
-
-void board_t::screenshot() {
-    fstream file;
-    file.open("screenshot.txt", std::ios::out);
-    if (!file.good()) {
-        std::cout << "Error opening screenshot.txt" << std::endl;
-        return;
-    }
-
-    for (int i = 0; i < height; ++i) {
-        for (int j = 0; j < width; ++j) {
-            file << cells[i][j]->get_display_value();
-        }
-        file << endl;
-    }
-
-    file.close();
-    cout << "Took Screenshot" << endl;
-}
 
 void board_t::reveal_cell(const unsigned int row, const unsigned int col) {
     if (row >= height || col >= width)

@@ -19,10 +19,6 @@ public:
 
     void place_mine(unsigned int row, unsigned int col);
 
-    void display();
-
-    void screenshot();
-
     void reveal_cell(unsigned int row, unsigned int col);
 
     void reveal_all_cells();

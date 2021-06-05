@@ -1,71 +1,42 @@
 #include <iostream>
+#include <SFML/Graphics.hpp>
+
 #include "board.h"
 #include "gameover.h"
 
-#define WINDOW_WIDTH 10
-#define WINDOW_HEIGHT 10
-#define MINES 10
+#define BOARD_WIDTH 15
+#define BOARD_HEIGHT 15
+#define MINES 20
+#define CELL_SIZE 50
 
 using std::cin;
 using std::cout;
 using std::endl;
 
-void start_game(board_t *board);
-
-void show_manual() {
-    cout << "Game Manual: " << endl;
-    cout << "\tS - take screenshot" << endl;
-    cout << "\tR {r} {c} - reveal [r,c] cell" << endl;
-    cout << "\tF {r} {c} - flag   [r,c] cell" << endl;
-    cout << "\tU {r} {c} - unflag [r,c] cell" << endl;
-    cout << "\tQ - Quit Game" << endl;
-}
 
 int main() {
-    board_t board(WINDOW_WIDTH, WINDOW_HEIGHT);
+    board_t board(BOARD_WIDTH, BOARD_HEIGHT);
     board.place_mines(MINES);
-    show_manual();
 
-    try {
-        start_game(&board);
-    } catch (GameOver &e) {
-        board.reveal_all_cells();
-        board.display();
-        cout << e.what();
-    }
-}
+    int width = BOARD_WIDTH * CELL_SIZE;
+    int height = BOARD_HEIGHT * CELL_SIZE;
+    auto style = sf::Style::Titlebar | sf::Style::Close;
+    sf::RenderWindow window(sf::VideoMode(width, height), "Minesweeper Game", style);
 
-void start_game(board_t *board) {
-    char action;
-    unsigned int row, col;
-    board->display();
-
-    while (true) {
-        cout << "Enter Action: ";
-        cin >> action;
-
-        switch (action) {
-            case 'S':
-                board->screenshot();
-                continue;
-            case 'R':
-                cin >> row >> col;
-                board->reveal_cell(row, col);
-                break;
-            case 'F':
-                cin >> row >> col;
-                board->flag_cell(row, col);
-                break;
-            case 'U':
-                cin >> row >> col;
-                board->unflag_cell(row, col);
-                break;
-            case 'Q':
-                return;
-            default:
-                cout << "Unknown Action: " << action << endl;
-                continue;
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
         }
-        board->display();
+
+        window.clear(sf::Color::Black);
+
+        // draw everything here...
+        // window.draw(...);
+
+        window.display();
     }
 }
