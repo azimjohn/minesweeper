@@ -15,7 +15,15 @@ using std::cout;
 using std::endl;
 
 
+void show_manual(){
+    cout << "Manual:" << endl;
+    cout << "\tReveal Cell\t - Mouse Left Click" << endl;
+    cout << "\tFlag Cell\t - Mouse Right Click" << endl;
+    cout << "\tReset Board\t - Press 'R' on Keyboard" << endl;
+}
+
 int main() {
+    show_manual();
     board_t board(BOARD_WIDTH, BOARD_HEIGHT);
     board.place_mines(MINES);
 

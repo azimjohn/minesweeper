@@ -3,8 +3,8 @@
 
 using std::string;
 
-#ifndef MINESWEEPER_EXAMPLE_H
-#define MINESWEEPER_EXAMPLE_H
+#ifndef TEXTURE_MANAGER_H
+#define TEXTURE_MANAGER_H
 
 class TextureManager
 {
@@ -20,4 +20,4 @@ public:
     ~TextureManager();
 };
 
-#endif //MINESWEEPER_EXAMPLE_H
+#endif //TEXTURE_MANAGER_H
