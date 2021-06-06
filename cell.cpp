@@ -31,3 +31,11 @@ bool cell_t::auto_reveal() {
 bool cell_t::auto_reveal_neighbors() {
     return !is_mine && adjacent_mines == 0;
 }
+
+char cell_t::get_display_value() {
+    if (is_flagged) return 'f';
+    if (!is_revealed) return 'n';
+    if (is_mine) return 'b';
+
+    return (char) (adjacent_mines + '0');
+}

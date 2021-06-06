@@ -1,3 +1,8 @@
+#include <string>
+
+using std::string;
+
+
 struct cell_t {
 private:
     bool is_mine = false;
@@ -19,4 +24,6 @@ public:
     bool auto_reveal();
 
     bool auto_reveal_neighbors();
+
+    char get_display_value();
 };
