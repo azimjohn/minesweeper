@@ -34,6 +34,16 @@ board_t::~board_t() {
     delete[] cells;
 }
 
+
+void board_t::reset() {
+    for (int i = 0; i < height; ++i) {
+        for (int j = 0; j < width; ++j) {
+            cells[i][j]->reset();
+        }
+    }
+}
+
+
 void board_t::place_mines(const int count) {
     int i = 0;
     srand(time(nullptr));
@@ -128,4 +138,20 @@ void board_t::flag_cell(const unsigned int row, const unsigned int col) {
 void board_t::unflag_cell(const unsigned int row, const unsigned int col) {
     if (row < height && col < width)
         cells[row][col]->unflag();
+}
+
+void board_t::draw(sf::RenderWindow* window, TextureManager *textureManager, int cell_size) {
+    for (int i = 0; i < height; ++i) {
+        for (int j = 0; j < width; ++j) {
+            cell_t* cell = cells[i][j];
+
+            sf::Texture texture = textureManager->retrieve(cell->get_display_value());
+            sf::Sprite sprite;
+
+            sprite.setTexture(texture);
+            sprite.setPosition(i * cell_size, j * cell_size);
+
+            window->draw(sprite);
+        }
+    }
 }

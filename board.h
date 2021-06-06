@@ -1,5 +1,5 @@
-#include <vector>
-#include <fstream>
+#include <SFML/Graphics.hpp>
+#include "texture_manager.h"
 #include "cell.h"
 
 using std::vector;
@@ -15,6 +15,8 @@ private:
 public:
     board_t(int W, int H);
 
+    void reset();
+
     void place_mines(int count);
 
     void place_mine(unsigned int row, unsigned int col);
@@ -26,6 +28,8 @@ public:
     void flag_cell(unsigned int row, unsigned int col);
 
     void unflag_cell(unsigned int row, unsigned int col);
+
+    void draw(sf::RenderWindow* window, TextureManager *textureManager, int cell_size);
 
     vector<pair<int, int> > get_adjacent_positions(unsigned int row, unsigned int col);
 
