@@ -1,5 +1,12 @@
 #include "cell.h"
 
+cell_t::cell_t() {
+    sprite = new sf::Sprite();
+}
+
+cell_t::~cell_t() {
+    delete sprite;
+}
 
 void cell_t::place_mine() {
     is_mine = true;

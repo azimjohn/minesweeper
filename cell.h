@@ -1,4 +1,5 @@
 #include <string>
+#include <SFML/Graphics.hpp>
 
 using std::string;
 
@@ -11,6 +12,10 @@ private:
     int adjacent_mines = 0;
 
 public:
+    cell_t();
+
+    ~cell_t();
+
     void place_mine();
 
     bool reveal();
@@ -28,4 +33,6 @@ public:
     char get_display_value();
 
     void reset();
+
+    sf::Sprite *sprite;
 };

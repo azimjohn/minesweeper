@@ -137,17 +137,17 @@ void board_t::toggle_flag_cell(const unsigned int row, const unsigned int col) {
 
 
 void board_t::draw(sf::RenderWindow* window, TextureManager *textureManager, int cell_size) {
+    window->clear();
+
     for (int i = 0; i < height; ++i) {
         for (int j = 0; j < width; ++j) {
             cell_t* cell = cells[i][j];
-
             sf::Texture texture = textureManager->retrieve(cell->get_display_value());
-            sf::Sprite sprite;
 
-            sprite.setTexture(texture);
-            sprite.setPosition(i * cell_size, j * cell_size);
+            cell->sprite->setTexture(texture);
+            cell->sprite->setPosition(i * cell_size, j * cell_size);
 
-            window->draw(sprite);
+            window->draw(*cell->sprite);
         }
     }
 }
