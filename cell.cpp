@@ -39,3 +39,9 @@ char cell_t::get_display_value() {
 
     return (char) (adjacent_mines + '0');
 }
+
+void cell_t::reset() {
+    is_flagged = false;
+    is_revealed = false;
+    is_mine = false;
+}

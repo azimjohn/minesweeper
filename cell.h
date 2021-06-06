@@ -26,4 +26,6 @@ public:
     bool auto_reveal_neighbors();
 
     char get_display_value();
+
+    void reset();
 };
