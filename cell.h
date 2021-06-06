@@ -15,7 +15,7 @@ public:
 
     bool reveal();
 
-    void flag();
+    void toggle_flag();
 
     void unflag();
 

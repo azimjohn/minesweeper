@@ -130,15 +130,11 @@ void board_t::reveal_all_cells() {
     }
 }
 
-void board_t::flag_cell(const unsigned int row, const unsigned int col) {
+void board_t::toggle_flag_cell(const unsigned int row, const unsigned int col) {
     if (row < height && col < width)
-        cells[row][col]->flag();
+        cells[row][col]->toggle_flag();
 }
 
-void board_t::unflag_cell(const unsigned int row, const unsigned int col) {
-    if (row < height && col < width)
-        cells[row][col]->unflag();
-}
 
 void board_t::draw(sf::RenderWindow* window, TextureManager *textureManager, int cell_size) {
     for (int i = 0; i < height; ++i) {

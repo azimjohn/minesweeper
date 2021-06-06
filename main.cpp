@@ -46,7 +46,6 @@ int main() {
                     board.reset();
                     board.place_mines(MINES);
                 }
-                cout << event.key.code;
             }
             else if (event.type == sf::Event::MouseButtonPressed && !isGameOver)
             {
@@ -67,7 +66,7 @@ int main() {
                 }
                 else
                 {
-                    board.flag_cell(i, j);
+                    board.toggle_flag_cell(i, j);
                 }
             }
 

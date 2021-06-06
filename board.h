@@ -25,9 +25,7 @@ public:
 
     void reveal_all_cells();
 
-    void flag_cell(unsigned int row, unsigned int col);
-
-    void unflag_cell(unsigned int row, unsigned int col);
+    void toggle_flag_cell(unsigned int row, unsigned int col);
 
     void draw(sf::RenderWindow* window, TextureManager *textureManager, int cell_size);
 

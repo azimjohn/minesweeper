@@ -12,8 +12,8 @@ bool cell_t::reveal() {
     return is_mine;
 }
 
-void cell_t::flag() {
-    is_flagged = true;
+void cell_t::toggle_flag() {
+    is_flagged = !is_flagged;
 }
 
 void cell_t::unflag() {
