@@ -41,6 +41,7 @@ char cell_t::get_display_value() {
 }
 
 void cell_t::reset() {
+    adjacent_mines = 0;
     is_flagged = false;
     is_revealed = false;
     is_mine = false;
