@@ -3,6 +3,9 @@
 
 using std::string;
 
+#ifndef MINESWEEPER_EXAMPLE_H
+#define MINESWEEPER_EXAMPLE_H
+
 class TextureManager
 {
 private:
@@ -16,3 +19,5 @@ public:
     void loadAll();
     ~TextureManager();
 };
+
+#endif //MINESWEEPER_EXAMPLE_H

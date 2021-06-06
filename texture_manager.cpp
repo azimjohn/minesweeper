@@ -39,8 +39,8 @@ void TextureManager::loadAll()
     load("../res/7.png", '7');
     load("../res/8.png", '8');
     load("../res/b.png", 'b');
-    load("../res/0.png", 'f');
-    load("../res/0.png", 'n');
+    load("../res/f.png", 'f');
+    load("../res/n.png", 'n');
 }
 
 TextureManager::~TextureManager() = default;
