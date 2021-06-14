@@ -1,4 +1,4 @@
-# minesweeper
+# Minesweeper 💣
 Minesweeper Game - in C++
 
 <img src="https://azimjon.com/media/2021/06/14/ezgif-2-b1b4e2f40650.gif" width="540">
