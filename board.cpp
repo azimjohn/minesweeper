@@ -77,7 +77,7 @@ vector<pair<int, int>> board_t::get_adjacent_positions(unsigned int row, unsigne
     for (int i = -1; i <= 1; i++) {
         for (int j = -1; j <= 1; j++) {
             if (i == 0 && j == 0) continue;
-            if (row + i > 0 and row + i < height and col + j > 0 and col + j < width)
+            if (row + i >= 0 and row + i < height and col + j >= 0 and col + j < width)
                 neighbours.emplace_back(row + i, col + j);
         }
     }
